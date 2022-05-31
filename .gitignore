@@ -371,3 +371,9 @@ Temporary Items
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,latex
+
+### Network Dumps ###
+
+*.pcap
+*.pcapng
+*.csv
