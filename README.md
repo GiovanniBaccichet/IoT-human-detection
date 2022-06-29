@@ -19,7 +19,7 @@
   <p align="center">
     Machine Learning for human detection on encrypted video streams 🧠
     <br />
-    <a href="https://github.com/GiovanniBaccichet/IoT-human-detection"><strong>Download Report »</strong></a>
+    <a href="https://github.com/GiovanniBaccichet/IoT-human-detection/blob/main/Report/report.pdf"><strong>Download Report »</strong></a>
     <br />
     <br />
     <a href="https://baccichet.org">Developer 👨🏻‍💻</a>
