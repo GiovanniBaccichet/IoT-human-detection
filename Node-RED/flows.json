@@ -235,15 +235,15 @@
         "dot": true,
         "ymin": "0",
         "ymax": "1",
-        "removeOlder": 1,
-        "removeOlderPoints": "1000",
-        "removeOlderUnit": "604800",
+        "removeOlder": "20",
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "1",
         "cutout": 0,
         "useOneColor": false,
         "useUTC": false,
         "colors": [
-            "#1f77b4",
-            "#aec7e8",
+            "#377d71",
+            "#fbc5c5",
             "#ff7f0e",
             "#2ca02c",
             "#98df8a",
@@ -255,7 +255,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 1140,
+        "x": 1380,
         "y": 720,
         "wires": [
             []
@@ -266,7 +266,7 @@
         "type": "function",
         "z": "4b0a649afa8b5ab6",
         "name": "Message Formatter",
-        "func": "var msg2 = {};\n\nfor(let i=0;i<1047;i++){\n    msg2.payload = msg.payload[i].person;\n}\n\nmsg2.topic = 'Prediction';\n\nreturn msg2;",
+        "func": "var msg2 = {};\n\nmsg2.payload = msg.payload.person;\nmsg2.topic = 'Prediction';\n\nreturn msg2;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -276,8 +276,7 @@
         "y": 760,
         "wires": [
             [
-                "c56fd0fe0fcc6bc7",
-                "aca3154941669087"
+                "123ce6465e06bd81"
             ]
         ]
     },
@@ -327,7 +326,7 @@
         "sep": ",",
         "hdrin": "",
         "hdrout": "none",
-        "multi": "mult",
+        "multi": "one",
         "ret": "\\n",
         "temp": "person",
         "skip": "0",
@@ -351,7 +350,7 @@
         "sep": ",",
         "hdrin": "",
         "hdrout": "none",
-        "multi": "mult",
+        "multi": "one",
         "ret": "\\n",
         "temp": "person",
         "skip": "0",
@@ -436,7 +435,7 @@
         "type": "debug",
         "z": "4b0a649afa8b5ab6",
         "name": "Message Formatter Debugger",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -444,7 +443,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1210,
+        "x": 1450,
         "y": 640,
         "wires": []
     },
@@ -453,7 +452,7 @@
         "type": "debug",
         "z": "4b0a649afa8b5ab6",
         "name": "Message Formatter Debugger",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -461,7 +460,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1210,
+        "x": 1450,
         "y": 800,
         "wires": []
     },
@@ -470,7 +469,7 @@
         "type": "function",
         "z": "4b0a649afa8b5ab6",
         "name": "Message Formatter",
-        "func": "var msg1 = {};\n\nfor(let i=0;i<1047;i++){\n    msg1.payload = msg.payload[i].person;\n}\n\nmsg1.topic = 'GT';\n\nreturn msg1;",
+        "func": "var msg1 = {};\n\n\nmsg1.payload = msg.payload.person;\nmsg1.topic = 'GT';\n\nreturn msg1;\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -480,8 +479,59 @@
         "y": 680,
         "wires": [
             [
+                "72d6dec3520c92d1"
+            ]
+        ]
+    },
+    {
+        "id": "72d6dec3520c92d1",
+        "type": "delay",
+        "z": "4b0a649afa8b5ab6",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1130,
+        "y": 680,
+        "wires": [
+            [
                 "c56fd0fe0fcc6bc7",
                 "1ea9623ba4d98ed9"
+            ]
+        ]
+    },
+    {
+        "id": "123ce6465e06bd81",
+        "type": "delay",
+        "z": "4b0a649afa8b5ab6",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1130,
+        "y": 760,
+        "wires": [
+            [
+                "c56fd0fe0fcc6bc7",
+                "aca3154941669087"
             ]
         ]
     },
