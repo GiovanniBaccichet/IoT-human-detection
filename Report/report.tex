@@ -62,7 +62,7 @@ Everything disclosed in this report (except for the network dumps, due to privac
 
 \section{Network Setup}
 
-Figure \ref{fig::net-topology} represents a simplified version of the network topology used is displayed. Briefly: two computers connected to the same network, the red one using a 5 GHz WiFi connection, the other one using a Gigabit Ethernet connection. In the following section the \textit{Internet} portion of the diagram will be addresses, along with the network traffic generation process followed for the experiment.
+Figure \ref{fig::net-topology} represents a simplified version of the network topology used. Briefly: two computers connected to the same network, the red one using a 5 GHz WiFi connection, the other one using a Gigabit Ethernet connection. In the following section the \textit{Internet} portion of the diagram will be addressed, along with the network traffic generation process followed during the experiment.
 
 \begin{figure}[h]
 	\centering
@@ -73,18 +73,18 @@ Figure \ref{fig::net-topology} represents a simplified version of the network to
 
 \subsection[]{Traffic Generation}
 
-Traffic generation was performed using the PC dumping the network traffic as a participant of a Zoom call, in which the target PC was the administrator and had the webcam turned on. The IP address of the eavesdropper was \texttt{192.168.178.69}. Since Zoom is not a \textit{Peer-To-Peer} application, an IP was needed in order to clean out the traffic from other unwanted destinations (sources). For this purpose an application firewall (\texttt{Little Snitch 5.4.1}) was used: it allowed to visualize a list of addresses used by Zoom to relay the traffic, see figure \ref{fig::little-snitch}. This allowed to get an idea of the range of IP addresses that the service provider used to perform the operation. \\ The time period in which someone was framed by the webcam was about 20 minutes, the same for the background only, for a total of 40 minutes.
+Traffic generation was performed using the PC dumping the network traffic as a participant of a Zoom call, in which the target PC was the administrator and had the webcam turned on. The IP address of the eavesdropper was \texttt{192.168.178.69}. Since Zoom is not a \textit{Peer-To-Peer} application, an IP was required to clean out the traffic from other unwanted destinations (sources). For this purpose an application firewall (\texttt{Little Snitch 5.4.1}) was used: it allowed to visualize a list of addresses used by Zoom to relay the traffic, see figure \ref{fig::little-snitch}. This allowed to get an idea of the range of IP addresses that the service provider used for allowing calls between users. \\ The time period in which someone was framed by the webcam was about 20 minutes, the same for the background only, for a total of 40 minutes.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{assets/little-snitch.png}
-	\caption{Little Snitch instance, visualizing Zoom.US traffic (\textit{IP addresses don't correspond to the Juputer Notebook's ones because this screenshot was taken in a second moment})}
+	\caption{Little Snitch instance, visualizing Zoom.US traffic (\textit{IP addresses don't match to the Juputer Notebook's ones because this screenshot was taken in a second moment})}
 	\label{fig::little-snitch}
 \end{figure}
 
 \subsection{Traffic Acquisition}
 
-Traffic acquisition was performed using \texttt{Wireshark} to acquire a \textit{Packet CAPture} (PCAP) file, from which some interesting information was extracted and exported in \textit{Comma Separated Value} (CSV) format, using \texttt{tshark}. The latter is presented in a terminal fashion, and the command used was:
+Traffic acquisition was performed using \texttt{Wireshark} to generate a \textit{Packet CAPture} (PCAP) file, from which some interesting information was extracted and exported in \textit{Comma Separated Value} (CSV) format, using \texttt{tshark}. The latter is presented in a terminal fashion, and the command used was:
 
 \begin{commandline}
 	\begin{verbatim}
@@ -102,13 +102,13 @@ Said command allowed to export a CSV with the following characteristics (columns
 	\item Protocol;
 	\item Frame Length.
 \end{itemize}
-From an initial network dump of \texttt{8.43 GB}, this allowed to narrow down to only \texttt{10.8 MB}.
+From an initial network dump of \texttt{8.43 GB}, this additional step allowed to narrow down to only \texttt{10.8 MB}.
 
 %------------------------------------------------
 
 \section{Node-RED Setup}
 
-In order to acquire a \textit{Ground Truth}, and represent it, a \textit{Node-RED} dashboard was used. In the figures below it is possible to see the \textit{flow} used (Figure \ref{fig::node-red-flow}), and the dashboard itself (Figure \ref{fig::node-red-dashboard}). \\ Node-RED was running in a Docker container: so the CSV generated and (at the end) parsed were inputted using a remote shell connection.
+In order to acquire a \textit{Ground Truth}, and represent it, a \textit{Node-RED} dashboard was used. In the figures below it is possible to see the \textit{flow} used (Figure \ref{fig::node-red-flow}), and the \textit{Ground Truth Builder} widget (Figure \ref{fig::node-red-dashboard}). \\ Node-RED was running in a Docker container: so the CSV generated and (at the end) parsed were inputted using a remote shell connection.
 
 \begin{figure}[h!]
 	\centering
@@ -127,7 +127,7 @@ The ground truth consisted, as mentioned above, in a CSV reporting the \texttt{t
 
 \section{Features and Data Visualization}
 
-Everything disclosed in the previous section was used as an input for the Jupyter Notebook (which can be found in the repository mentioned in the introduction). The most technical details won't be addressed in this report, since every step is commented in the code itself. \\ On the other hand, in this section some remarks about the data acquired (before the model training) will be given. \\ The approach used to select the features was incremental: starting with few features, visualizing them graphically and trying to train the model. The features used were: \texttt{PacketNumber} (\textit{number of packets within a time interval of 450 ms}), \texttt{PacketIntervalAvg} (\textit{average amount of time between packets within 450 ms} - figure \ref{fig::avg-inter-time}), \texttt{PacketSizeAvg} (\textit{average packet size} - figure \ref{fig::avg-pkt-size}), \texttt{PacketSizeStd}, \texttt{PacketSizeMed}, \texttt{PacketSizeMin}, \texttt{PacketSizeMax}, \texttt{InboundCount} (\textit{number of packets received by the eavesdropper} - figure \ref{fig::inbound-traffic}), \texttt{OutboundCount} (\textit{number of packets sent by the eavesdropper}). \\ The correlation matrix between said features can be seen in figure \ref{fig::correlation-matrix}.
+Everything disclosed in the previous section was used as an input for the Jupyter Notebook (which can be found in the repository mentioned in the Introduction). The most technical details won't be addressed in this report, since every step is commented in the code itself. \\ On the other hand, in this section some remarks about the data acquired (before the model training) will be given. \\ The approach used to select the features was incremental: starting with few features, visualizing them graphically and trying to train the model. The features used were: \texttt{PacketNumber} (\textit{number of packets within a time interval of 450 ms}), \texttt{PacketIntervalAvg} (\textit{average amount of time between packets within 450 ms} - figure \ref{fig::avg-inter-time}), \texttt{PacketSizeAvg} (\textit{average packet size} - figure \ref{fig::avg-pkt-size}), \texttt{PacketSizeStd}, \texttt{PacketSizeMed}, \texttt{PacketSizeMin}, \texttt{PacketSizeMax}, \texttt{InboundCount} (\textit{number of packets received by the eavesdropper} - figure \ref{fig::inbound-traffic}), \texttt{OutboundCount} (\textit{number of packets sent by the eavesdropper}). \\ The correlation matrix between said features can be seen in figure \ref{fig::correlation-matrix}.
 
 \begin{figure}[h!]
 	\centering
@@ -165,7 +165,7 @@ Plotting some of those features, with respect to the ground truth (pink line), i
 	\label{fig::inbound-traffic}
 \end{figure}
 
-In the Jupyter Notebook are attached some other diagrams aimed at visualizing the data frame we are dealing with and also the selected features.
+In the Jupyter Notebook are also attached some other diagrams aimed at visualizing the data frame we are dealing with and also the selected features and better understanding their relevance, from a macro standpoint.
 
 \newpage~\newpage
 \section{Results}
@@ -254,7 +254,7 @@ Results were exported from the Jupyter Notebook in CSV format, then copy-pasted 
 	\caption{Node-RED ML Results diagram.}
 	\label{fig::node-red-chart}
 \end{figure}
-In order to better visualize the data provided by the Jupyter Notebook, the Node-RED chart was realized using 2 \texttt{delay} nodes: this allowed to spread data in time and not having a cluttered diagram with all the CSV data all in one place at the same time, resulting in being unreadable. \\ As disclosed in the previous section, due to the accuracy of the model, the lines of actual and predicted values overlap almost every time; in the screenshot displayed in figure \ref{fig::node-red-chart} it is possible to see one time that the model got the wrong prediction.
+In order to better visualize the data provided by the Jupyter Notebook, the Node-RED chart was realized using 2 \texttt{delay} nodes (one for the ground truth, the other one for the predicted values): this allowed to spread data (also having a dynamic view of it) in time and not having a cluttered diagram with all the CSV data all in one place at the same time, resulting in being unreadable. \\ As disclosed in the previous section, due to the accuracy of the model, the lines of actual and predicted values overlap almost every time; in the screenshot displayed in figure \ref{fig::node-red-chart} it is possible to see one time that the model got the wrong prediction.
  
 %----------------------------------------------------------------------------------------
 
