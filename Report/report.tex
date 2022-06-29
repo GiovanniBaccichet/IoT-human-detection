@@ -135,7 +135,7 @@ Everything disclosed in the previous section was used as an input for the Jupyte
 	\caption{Selected features correlation matrix}
 	\label{fig::correlation-matrix}
 \end{figure}
-Plotting some of those features, with respect to the ground truth, it is evident when someone if framed and when not, despite the fact that some features are correlated (not completely) with some others.
+Plotting some of those features, with respect to the ground truth (pink line), it is evident when someone if framed and when not, despite the fact that some features are correlated (not completely) with some others.
 
 \begin{figure}[h!]
 	\centering
@@ -154,7 +154,7 @@ Plotting some of those features, with respect to the ground truth, it is evident
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=12cm]{assets/avg-pkt-size.png}
-	\caption{Average Packet Size within a Sample (450 ms)}
+	\caption{Average Packet Size within a Sample of 450 ms}
 	\label{fig::avg-pkt-size}
 \end{figure}
 
@@ -170,19 +170,81 @@ In the Jupyter Notebook are attached some other diagrams aimed at visualizing th
 \newpage~\newpage
 \section{Results}
 
-As anticipated by the data visualization, the results were very accurate. The ML algorithms tested were:
-
-\begin{itemize}
-	\item Random Forest;
-	\item K-Nearest Neighbor;
-	\item Support Vector Machine;
-	\item Logistic Regression.
-\end{itemize}
-Every algorithm tested presented very similar results, with the lowest accuracy reported of around 97\%, and the highest one of 99\%. Everything is reported in the Jupyter Notebook, however in this report will be included some more information about the best and the worst performing ones.
+As anticipated by the data visualization, the results were very accurate. The ML algorithms tested were: \textit{Random Forest}, \textit{K-Nearest Neighbor}, \textit{Support Vector Machine}, \textit{Logistic Regression}. \\
+Every algorithm tested presented very similar results, with the lowest accuracy reported of around 97\%, and the highest one of 99\%. Everything is reported in the Jupyter Notebook, however in this section will be included some more information about only 2 of the trained models since they all behaved the same.
 
 \subsection[]{Random Forest}
 
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l|llll}
+		\toprule 
+		Label & Precision (\%) & Recall (\%) & F1 Score (\%) \\
+		\midrule
+		\rowcolor{black!10} \texttt{Background (0)} & 99.6047 & 97.2973 & 98.4375 \\
+		\texttt{Person (1)} & 97.4122 & 99.6219 & 98.5047 \\
+		\bottomrule
+	\end{tabular}
+	\caption{\textit{Random Forest} trained model metrics}
+	\label{tab:rf-results}
+ \end{table}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=6cm]{assets/rf-confusion-matrix.png}
+	\caption{Random Forest Model Confusion Matrix}
+	\label{fig::rf-confusion-matrix}
+\end{figure}
+
 \subsection[]{Support Vector Machine}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l|llll}
+		\toprule 
+		Label & Precision (\%) & Recall (\%) & F1 Score (\%) \\
+		\midrule
+		\rowcolor{black!10} \texttt{Background (0)} & 97.5285 & 99.0347 & 98.2759 \\
+		\texttt{Person (1)} & 99.0403 & 97.5425 & 98.2857 \\
+		\bottomrule
+	\end{tabular}
+	\caption{\textit{Support Vector Machine} trained model metrics}
+	\label{tab:svm-results}
+ \end{table}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=6cm]{assets/SVM-confusion-matrix.png}
+	\caption{Support Vector Machine Model Confusion Matrix}
+	\label{fig::svm-confusion-matrix}
+\end{figure}
+
+\subsection[]{Predicted vs Actual Data Visualization}
+
+Taking as an example the RF model, the actual predicted vs actual values chart looks something like figure \ref{fig::rf-predicted-vs-actual-total}, and the SVM one, like figure \ref{fig::svm-predicted-vs-actual-total}: this is completely unreadable from this report. In the Jupyter Notebook the plot can be enlarged and inspected, the values match almost completely; this can be noticed in figure \ref{fig::rf-predicted-vs-actual-enlarged}, an enlargement of figure \ref{fig::rf-predicted-vs-actual-total}, with some line tweaking to make the visualization easier.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=10cm]{assets/svm-diagram-predicted-vs-actual-total.png}
+	\caption{Random Forest Model Predicted (orange) vs Actual (blue) Values}
+	\label{fig::rf-predicted-vs-actual-total}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=10cm]{assets/svm-diagram-predicted-vs-actual-total.png}
+	\caption{Support Vector Machine Model Predicted (orange) vs Actual (blue) Values}
+	\label{fig::svm-predicted-vs-actual-total}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=9cm]{assets/rf-predicted-vs-actual-enlarged.png}
+	\caption{Random Forest Model Predicted (orange) vs Actual (blue) Values - Enlarged}
+	\label{fig::rf-predicted-vs-actual-enlarged}
+\end{figure}
+
+\subsection[]{Node-RED Results Chart}
 
 
  
