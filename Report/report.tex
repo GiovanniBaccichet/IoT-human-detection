@@ -247,6 +247,14 @@ Taking as an example the RF model, the actual predicted vs actual values chart l
 \subsection[]{Node-RED Results Chart}
 
 Results were exported from the Jupyter Notebook in CSV format, then copy-pasted in the Node-RED's docker container, in order to be visualized using the dedicated dashboard. Since the procedure would have been the same for every algorithm, and so the results, only the RF model ones were plotted using this application.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=9cm]{assets/node-red-chart.png}
+	\caption{Node-RED ML Results diagram.}
+	\label{fig::node-red-chart}
+\end{figure}
+In order to better visualize the data provided by the Jupyter Notebook, the Node-RED chart was realized using 2 \texttt{delay} nodes: this allowed to spread data in time and not having a cluttered diagram with all the CSV data all in one place at the same time, resulting in being unreadable. \\ As disclosed in the previous section, due to the accuracy of the model, the lines of actual and predicted values overlap almost every time; in the screenshot displayed in figure \ref{fig::node-red-chart} it is possible to see one time that the model got the wrong prediction.
  
 %----------------------------------------------------------------------------------------
 
