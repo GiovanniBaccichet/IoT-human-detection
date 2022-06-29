@@ -112,7 +112,7 @@ In order to acquire a \textit{Ground Truth}, and represent it, a \textit{Node-RE
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=10cm]{assets/node-red-flow.png}
+	\includegraphics[width=12cm]{assets/node-red-flow.png}
 	\caption{Node-RED Flow}
 	\label{fig::node-red-flow}
 \end{figure}
@@ -225,14 +225,14 @@ Taking as an example the RF model, the actual predicted vs actual values chart l
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=10cm]{assets/svm-diagram-predicted-vs-actual-total.png}
+	\includegraphics[width=9.5cm]{assets/svm-diagram-predicted-vs-actual-total.png}
 	\caption{Random Forest Model Predicted (orange) vs Actual (blue) Values}
 	\label{fig::rf-predicted-vs-actual-total}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=10cm]{assets/svm-diagram-predicted-vs-actual-total.png}
+	\includegraphics[width=9.5cm]{assets/svm-diagram-predicted-vs-actual-total.png}
 	\caption{Support Vector Machine Model Predicted (orange) vs Actual (blue) Values}
 	\label{fig::svm-predicted-vs-actual-total}
 \end{figure}
@@ -240,13 +240,13 @@ Taking as an example the RF model, the actual predicted vs actual values chart l
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=9cm]{assets/rf-predicted-vs-actual-enlarged.png}
-	\caption{Random Forest Model Predicted (orange) vs Actual (blue) Values - Enlarged}
+	\caption{Random Forest Model Predicted (orange) vs Actual (blue) Values - Enlarged (\textit{as expected from a 99\% accuracy, the lines overlap almost every time}).}
 	\label{fig::rf-predicted-vs-actual-enlarged}
 \end{figure}
 
 \subsection[]{Node-RED Results Chart}
 
-
+Results were exported from the Jupyter Notebook in CSV format, then copy-pasted in the Node-RED's docker container, in order to be visualized using the dedicated dashboard. Since the procedure would have been the same for every algorithm, and so the results, only the RF model ones were plotted using this application.
  
 %----------------------------------------------------------------------------------------
 
