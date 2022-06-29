@@ -1,0 +1,374 @@
+[
+    {
+        "id": "4b0a649afa8b5ab6",
+        "type": "tab",
+        "label": "IoT Human Detection",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c812b04c1f459088",
+        "type": "ui_button",
+        "z": "4b0a649afa8b5ab6",
+        "name": "",
+        "group": "930c1b6efdeae016",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "label": "Present",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#53BF9D",
+        "className": "",
+        "icon": "fa-user",
+        "payload": "1",
+        "payloadType": "str",
+        "topic": "presence_detection",
+        "topicType": "str",
+        "x": 420,
+        "y": 280,
+        "wires": [
+            [
+                "241a3a410914db9c"
+            ]
+        ]
+    },
+    {
+        "id": "57a573c405a42926",
+        "type": "ui_chart",
+        "z": "4b0a649afa8b5ab6",
+        "name": "",
+        "group": "930c1b6efdeae016",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Ground Truth",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "57",
+        "removeOlderPoints": "100",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 870,
+        "y": 280,
+        "wires": [
+            [
+                "59f36aa78765ddc6"
+            ]
+        ]
+    },
+    {
+        "id": "4af028c3b8d81134",
+        "type": "ui_button",
+        "z": "4b0a649afa8b5ab6",
+        "name": "",
+        "group": "930c1b6efdeae016",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "label": "Not Present",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#F94C66",
+        "className": "",
+        "icon": "fa-user-times",
+        "payload": "0",
+        "payloadType": "str",
+        "topic": "presence_detection",
+        "topicType": "str",
+        "x": 410,
+        "y": 480,
+        "wires": [
+            [
+                "241a3a410914db9c"
+            ]
+        ]
+    },
+    {
+        "id": "e0a24a3c6276df89",
+        "type": "file",
+        "z": "4b0a649afa8b5ab6",
+        "name": "Ground Truth Export",
+        "filename": "ground-truth.csv",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "utf8",
+        "x": 1180,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8d4d21ea8aa248a8",
+        "type": "debug",
+        "z": "4b0a649afa8b5ab6",
+        "name": "Formatter Debugger",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "59f36aa78765ddc6",
+        "type": "debug",
+        "z": "4b0a649afa8b5ab6",
+        "name": "Chart Debugger",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d08ad0d793513f33",
+        "type": "function",
+        "z": "4b0a649afa8b5ab6",
+        "name": "CSV Formatter",
+        "func": "var timestamp = new Date().getTime();\nvar detected = msg.payload\n\nmsg.payload = timestamp+\",\"+detected;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 380,
+        "wires": [
+            [
+                "8d4d21ea8aa248a8",
+                "e0a24a3c6276df89"
+            ]
+        ]
+    },
+    {
+        "id": "241a3a410914db9c",
+        "type": "function",
+        "z": "4b0a649afa8b5ab6",
+        "name": "Repeater",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 380,
+        "wires": [
+            [
+                "57a573c405a42926",
+                "06801e56f18f8090",
+                "d08ad0d793513f33"
+            ]
+        ]
+    },
+    {
+        "id": "06801e56f18f8090",
+        "type": "debug",
+        "z": "4b0a649afa8b5ab6",
+        "name": "Repeater Debugger",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "c56fd0fe0fcc6bc7",
+        "type": "ui_chart",
+        "z": "4b0a649afa8b5ab6",
+        "name": "",
+        "group": "1635b69a229a47ac",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Results",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 840,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2b0c83735cdd4c88",
+        "type": "function",
+        "z": "4b0a649afa8b5ab6",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 640,
+        "wires": [
+            [
+                "c56fd0fe0fcc6bc7"
+            ],
+            [
+                "c56fd0fe0fcc6bc7"
+            ]
+        ]
+    },
+    {
+        "id": "febeaa7433bf36bc",
+        "type": "file in",
+        "z": "4b0a649afa8b5ab6",
+        "name": "",
+        "filename": "Read Ground Truth",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 410,
+        "y": 600,
+        "wires": [
+            [
+                "2b0c83735cdd4c88"
+            ]
+        ]
+    },
+    {
+        "id": "6fbd8ccc0c3c778a",
+        "type": "file in",
+        "z": "4b0a649afa8b5ab6",
+        "name": "",
+        "filename": "Read ML Results",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 410,
+        "y": 680,
+        "wires": [
+            [
+                "2b0c83735cdd4c88"
+            ]
+        ]
+    },
+    {
+        "id": "8dde7eab78a9505b",
+        "type": "comment",
+        "z": "4b0a649afa8b5ab6",
+        "name": "Grond Truth Builder",
+        "info": "",
+        "x": 170,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "c1f6ac15c3448075",
+        "type": "comment",
+        "z": "4b0a649afa8b5ab6",
+        "name": "Results Visualization",
+        "info": "",
+        "x": 170,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "930c1b6efdeae016",
+        "type": "ui_group",
+        "name": "Ground Truth Builder",
+        "tab": "bedf4ec803568c75",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1635b69a229a47ac",
+        "type": "ui_group",
+        "name": "ML Results",
+        "tab": "bedf4ec803568c75",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bedf4ec803568c75",
+        "type": "ui_tab",
+        "name": "IoT - Human Detection Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": true
+    }
+]
