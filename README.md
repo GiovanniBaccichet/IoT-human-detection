@@ -73,12 +73,3 @@ Distributed under the `GPLv3` License. See `LICENSE` for more information.
 Giovanni Baccichet - [@Giovanni_Bacci](https://twitter.com/Giovanni_Bacci) - `github[at]baccichet.org`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments 👏🏻
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-<p align="right">(<a href="#top">back to top</a>)</p>
